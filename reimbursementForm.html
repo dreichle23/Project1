@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reimbursement Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">  
+
+</head>
+<body>
+    <h1 style="text-align: center;">Reimbursement Form</h1><br>
+    <div class="d-grid gap-2 col-6 mx-auto">
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Start Date:</span>
+        <input type="number" id=startDate class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Submit Date:</span>
+        <input type="number" id=submitDate class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Work Time Missed:</span>
+        <input type="number" id=workTime class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Location:</span>
+        <input type="text" id=location class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Description:</span>
+        <input type="text" id=description class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">Cost:</span>
+        <input type="number" id=cost class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <button  class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Event Types</button>
+        <ul class="dropdown-menu" id ="dropmenu">
+          <li><a class="dropdown-item di1" onclick="fill(this.id)" id="test1" href="#">Uni Course</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fill(this.id)" id="test2">Seminar</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fill(this.id)" id="test3">Cert Prep Class</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fill(this.id)" id="test4">Certification</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fill(this.id)" id="test5">Technical Training</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fill(this.id)" id="test6">Other</a></li>
+        </ul>
+        <input type="text" class="form-control" id="dropInput" aria-label="Text input with dropdown button">
+      </div>
+    <div class="input-group mb-3">
+        <button  class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Grade Types</button>
+        <ul class="dropdown-menu" id ="dropmenu">
+          <li><a class="dropdown-item di1" onclick="fillGrade(this.id)" id="test7" href="#">Letter Grade</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fillGrade(this.id)" id="test8">Pass/Fail</a></li>
+          <li><a class="dropdown-item" href="#" onclick="fillGrade(this.id)" id="test9">Presentation</a></li>
+        </ul>
+        <input type="number" class="form-control" id="gradeInput" aria-label="Text input with dropdown button">
+    </div>
+   
+</div>
+<div class="d-grid gap-2 col-6 mx-auto">
+    <button type="button" onclick="submitForm()" class="btn btn-primary">Submit Form</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+<script>
+    function fill(clicked_id){
+        if (clicked_id == "test1"){
+            document.getElementById("dropInput").value = "Uni course";
+        }else if (clicked_id == "test2"){
+            document.getElementById("dropInput").value = "Seminar";
+        }else if (clicked_id =="test3"){
+            document.getElementById("dropInput").value = "Cert Prep Class";
+        }else if (clicked_id =="test4"){
+            document.getElementById("dropInput").value = "Certification";
+        }else if (clicked_id =="test5"){
+            document.getElementById("dropInput").value = "Technical Training";
+        }else{
+            document.getElementById("dropInput").value = "Other";
+        }
+
+
+
+    }//end function fill
+
+    function fillGrade(clicked_id){
+        if (clicked_id == "test7"){
+            document.getElementById("gradeInput").value = 1;
+        }else if(clicked_id == "test8"){
+            document.getElementById("gradeInput").value = 2;
+        }else{
+            document.getElementById("gradeInput").value = 3;
+        }
+    }
+
+    async function submitForm(){
+        const startDateValue = document.getElementById("startDate").value;
+        const submitDateValue = document.getElementById("submitDate").value;
+        const workTimeValue = document.getElementById("workTime").value;
+        const locationValue = document.getElementById("location").value;
+        const descriptionValue = document.getElementById("description").value;
+        const costValue = document.getElementById("cost").value;
+        const eventTypeValue = document.getElementById("dropInput").value;
+        const gradeTypeValue = document.getElementById("gradeInput").value;
+    
+
+        
+        const url2 = `http://localhost:7000/grade/${gradeTypeValue}`;
+        const gradeResponse = await fetch(url2);
+        const gradeObj = await gradeResponse.json();
+        
+
+        
+
+
+        const id2 = localStorage.employee_id;
+        const url4 = `http://localhost:7000/employees/${id2}`;
+        const employeeResponse = await fetch(url4);
+        const emObj = await employeeResponse.json();
+        let id5 = 1;
+        if(emObj.department.departmentHeadId === emObj.dsId){
+            id5 = 2;
+
+        }
+        if (emObj.employeeId == emObj.department.departmentHeadId){
+            id5 = 3;
+        }
+
+        const url3 = `http://localhost:7000/status/${id5}`;
+        const statusResponse = await fetch(url3);
+        const statusObj = await statusResponse.json();
+
+        console.log(gradeObj.gradeId)
+
+        const grades = {
+            gradeId: gradeObj.gradeId,
+            gradeType: gradeObj.gradeType
+        }
+        const statuses = {
+            status_id: statusObj.status_id,
+            status: statusObj.status
+        }
+
+        const employee = {
+            employeeId : emObj.employeeId,
+            name: emObj.name,
+            Department: emObj.department,
+            emailAddress: emObj.emailAddress,
+            dsId: emObj.dsId,
+            benCo: emObj.benCo,
+            password: emObj.password,
+            username: emObj.username
+        }
+
+        
+
+        const data = {
+            startDate: startDateValue,
+            submitDate: submitDateValue,
+            worktime: workTimeValue,
+            location: locationValue,
+            description: descriptionValue,
+            cost: costValue,
+            eventType: eventTypeValue,
+            gradeType: grades,
+            employeeId: employee,
+            statusId: statuses
+
+
+        }
+
+
+
+        const url = "http://localhost:7000/files";
+
+
+        const httpResponse = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data)
+        });
+        console.log(data)
+
+    }
+    
+</script>
+</html>
