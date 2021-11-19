@@ -37,11 +37,13 @@ Sixth, load all the html files in an IDE that runs HTML files.
 Lastly, open the login.html file in the browser of your choice.
 
 # Usage
-- First Log in to the system
-- Then choose which action you wish to do
-- In the Approval and Submitted Forms hit the Get Files button to see the files
+- First Log in to the system ![image](https://user-images.githubusercontent.com/93621347/142667500-5edc0ace-d98d-430d-b4ed-719383e72285.png)
+- Then choose which action you wish to do ![image](https://user-images.githubusercontent.com/93621347/142667624-ecafb269-1542-4398-80b7-e60f8ab1cc60.png)
+- In the Approval and Submitted Forms hit the Get Files button to see the files ![image](https://user-images.githubusercontent.com/93621347/142667652-31e9d57c-af46-4d5c-b133-ac62323f7a93.png)
 - To go back to the previous page use the back arrow in your broswer
 - To login as a different user go back to the login page and put in new credentials
+- To submit a form input valid fields and click submit ![image](https://user-images.githubusercontent.com/93621347/142667731-157dd633-2a44-4a6f-bcea-7d01daa3e3a1.png)
+
 
 
 
